@@ -1,7 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const antispam = require('discord-anti-spam'); 
-
 async function apiPost(token, prefix) { 
 
 if(!token) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot token or invite bot token"); 
