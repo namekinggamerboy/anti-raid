@@ -1,9 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-async function apiPost(token, prefix) { 
-
-if(!token) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot token or invite bot token"); 
-if(!prefix) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot prefix"); 
 
 const AntiSpam = require('discord-anti-spam');
 const antiSpam = new AntiSpam({
@@ -23,6 +19,11 @@ const antiSpam = new AntiSpam({
     ignoredUsers: [], // Array of User IDs that get ignored.
     // And many more options... See the documentation.
 });
+
+async function apiPost(token, prefix) { 
+
+if(!token) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot token or invite bot token"); 
+if(!prefix) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot prefix"); 
  
 client.on('ready', () => console.log(`Logged in as ${client.user.tag}.`));
  
