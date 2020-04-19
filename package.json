@@ -1,13 +1,13 @@
 {
-  "name": "Protection",
-  "version": "1.0.0",
+  "name": "spam",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "namekinggamerboy",
   "license": "ISC",
   "dependencies": {
     "discord-anti-spam": "^2.4.0",
