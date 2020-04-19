@@ -19,7 +19,7 @@ const antiSpam = new AntiSpam({
     // And many more options... See the documentation.
 });
 
-async apiPost(token, prefix) { 
+async function apiPost(token, prefix) { 
 
 if(!token) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot token or invite bot token"); 
 if(!prefix) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot prefix"); 
