@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const antispam = require('discord-anti-spam'); 
-const prefix = "!"
 
+async function apiPost(token, prefix) { 
 
-// This is the anti-spam protection
+if(!token) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot token or invite bot token"); 
+if(!prefix) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot prefix"); 
 
 client.on('ready', () => {
-  // Module Configuration Constructor
    new antispam(client, {
         warnBuffer: 3, // Maximum ammount of messages allowed to send in the interval time before getting warned.
         maxBuffer: 5, // Maximum amount of messages allowed to send in the interval time before getting banned.
@@ -111,4 +111,6 @@ message.channel.send({
 
 // Enter your bot token here and done.
 
-client.login("token");
+client.login(token);
+}
+module.exports = apiPost;
