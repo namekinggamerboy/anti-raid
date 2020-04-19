@@ -7,22 +7,29 @@ async function apiPost(token, prefix) {
 if(!token) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot token or invite bot token"); 
 if(!prefix) return console.log("[spam-api]{type: error} ⚠️: make sure your give me bot prefix"); 
 
-client.on('ready', () => {
-   new antispam(client, {
-        warnBuffer: 3, // Maximum ammount of messages allowed to send in the interval time before getting warned.
-        maxBuffer: 5, // Maximum amount of messages allowed to send in the interval time before getting banned.
-        interval: 2000, // Amount of time in ms users can send the maxim amount of messages(maxBuffer) before getting banned. 
-        warningMessage: "please stop spamming!", // Message users receive when warned. (message starts with '@User, ' so you only need to input continue of it.) 
-        banMessage: "Has been banned for spamming!", // Message sent in chat when user is banned. (message starts with '@User, ' so you only need to input continue of it.) 
-        maxDuplicatesWarning: 5,// Maximum amount of duplicate messages a user can send in a timespan before getting warned.
-        maxDuplicatesBan: 10, // Maximum amount of duplicate messages a user can send in a timespan before getting banned.
-        deleteMessagesAfterBanForPastDays: 7, // Deletes the message history of the banned user in x days.
-        exemptRoles: [""], // Name of roles (case sensitive) that are exempt from spam filter.
-        exemptUsers: [""] // The Discord tags of the users (e.g: MrAugu#9016) (case sensitive) that are exempt from spam filter.
-      });
-      
-  // Rest of your code
+const AntiSpam = require('discord-anti-spam');
+const antiSpam = new AntiSpam({
+    warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
+    kickThreshold: 7, // Amount of messages sent in a row that will cause a ban.
+    banThreshold: 7, // Amount of messages sent in a row that will cause a ban.
+    maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
+    warnMessage: '{@user}, Please stop spamming.', // Message that will be sent in chat upon warning a user.
+    kickMessage: '**{user_tag}** has been kicked for spamming.', // Message that will be sent in chat upon kicking a user.
+    banMessage: '**{user_tag}** has been banned for spamming.', // Message that will be sent in chat upon banning a user.
+    maxDuplicatesWarning: 7, // Amount of duplicate messages that trigger a warning.
+    maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a warning.
+    maxDuplicatesBan: 12, // Amount of duplicate messages that trigger a warning.
+    exemptPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
+    ignoreBots: true, // Ignore bot messages.
+    verbose: true, // Extended Logs from module.
+    ignoredUsers: [], // Array of User IDs that get ignored.
+    // And many more options... See the documentation.
 });
+ 
+client.on('ready', () => console.log(`Logged in as ${client.user.tag}.`));
+ 
+client.on('message', (message) => antiSpam.message(message)); 
+
 
 client.on('ready', () => {
     console.log(`Logging as ${client.user.tag}`);
@@ -75,7 +82,7 @@ client.on('ready', () => {
 
  
 client.on('message', message => {
-    var prefix = "!"
+
     if (message.author.x5bz) return;
 if (!message.content.startsWith(prefix)) return;
         
